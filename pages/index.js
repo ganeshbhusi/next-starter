@@ -4,9 +4,10 @@ import Login from "./login/login";
 import CheckImage from "./Images/CheckImage";
 import {getSortedPostsData} from "../lib/posts";
 import {getSomeOnlineContent} from "../lib/fetchOnlineData";
+import fetchUserData from "../lib/fetchUserData";
 
 export default function Home(props) {
-  const {allPostsData = [], onlineContent = []} = props;
+  const {allPostsData = [], onlineContent = [], userData = {}} = props;
   return (
     <div>
       <Head>
@@ -16,7 +17,7 @@ export default function Home(props) {
       <Link
         href={{
           pathname: "/profile/[id]",
-          query: {id: "123"},
+          query: {id: 1},
         }}
       >
         Open Person
@@ -44,13 +45,13 @@ export default function Home(props) {
 export async function getStaticProps() {
   const onlineContent = await getSomeOnlineContent();
   const allPostsData = getSortedPostsData();
-  console.log(onlineContent);
+  const userData = await fetchUserData();
 
   const res = await fetch(`https://jsonplaceholder.typicode.com/todos`)
   const data = await res.json()
 
 
   return {
-    props: { onlineContent: onlineContent, onlineContent2: data, allPostsData },
+    props: { onlineContent: onlineContent, onlineContent2: data, allPostsData, userData },
   }
 }
