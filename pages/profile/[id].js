@@ -41,8 +41,13 @@ const Profile = (props) => {
 //   return { example }
 // }
 
-export async function getServerSideProps(context){
-  const userData = await fetchUserData(1);
+export async function getServerSideProps({query}){
+  const {
+    id
+  } = query;
+
+  const userData = await fetchUserData(id);
+  
   return {
     props: {userData}
   }

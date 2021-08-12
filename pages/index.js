@@ -20,7 +20,15 @@ export default function Home(props) {
           query: {id: 1},
         }}
       >
-        Open Person
+        Open Person 1
+      </Link>
+      <Link
+        href={{
+          pathname: "/profile/[id]",
+          query: {id: 2},
+        }}
+      >
+        Open Person 2
       </Link>
       <CheckImage />
       <p>Online Content Count: {onlineContent.length}</p>
